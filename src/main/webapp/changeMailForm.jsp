@@ -13,7 +13,7 @@
 <div id="container">
     <header>
         <h1>
-            <span>Contact Tracing App</span>
+            <span>Tracing App</span>
         </h1>
         <nav>
             <ul>

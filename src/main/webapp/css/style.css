@@ -8,7 +8,7 @@ body {
 	font-family: arial,sans-serif;
 	font-size: 90%;
 	color: #303d11;
-	background-color: #303d11;
+	background-color: #ffffcc;
 }
 
 div#container {
@@ -53,8 +53,8 @@ h2, main, footer {
 }
 
 h1 {
-	background-image: url("../images/banner.png");
-	height: 100px;
+	background-image: url("../images/bannerKlein.png");
+	height: 112px;
 	background-repeat: no-repeat;
 	background-size: cover;
 	position: relative;
@@ -62,8 +62,9 @@ h1 {
 
 h1 span {
 	position: absolute;
-	right: 15px;
-	bottom: 15px;
+	right: 30px;
+	bottom: 30px;
+	color: #800080;
 }
 
 th,td {
@@ -137,6 +138,11 @@ input {
     height: 25px;
 }
 
+td {
+	word-break: break-all;
+	width: 25%;
+}
+
 
 /* desktop */
 @media screen and (min-width: 650px) {
@@ -145,6 +151,7 @@ input {
 	}
 	h1 {
 	background-image: url("../images/banner.png");
+		height: 176px;
 	}
 	
 	nav ul {
@@ -192,7 +199,10 @@ input {
     textarea {
         vertical-align: middle;    
     }
-	
+	td {
+		width: auto;
+		word-break: break-word;
+	}
 	
 }
 

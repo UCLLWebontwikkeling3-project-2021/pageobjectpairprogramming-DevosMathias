@@ -12,7 +12,7 @@
 <body>
 <div id="container">
 <header>
-<h1><span>Contact Tracing App</span></h1>
+<h1><span>Tracing App</span></h1>
 <nav>
 <ul>
 <li><a href="Controller">Home</a></li>

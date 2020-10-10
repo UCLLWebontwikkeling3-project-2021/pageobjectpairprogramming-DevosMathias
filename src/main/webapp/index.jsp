@@ -12,9 +12,7 @@
 <body>
 	<div id="container">
 		<header>
-			<h1>
-				<span>Tracing App</span>
-			</h1>
+			<h1><!--<span>Tracing App</span>--></h1>
 			<nav>
 				<ul>
 					<li id="actual"><a href="Controller">Home</a></li>
@@ -33,21 +31,17 @@
 					</ul>
 				</div>
 			</C:if>
-			Sed ut perspiciatis unde omnis iste natus error sit
-			voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
-			ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-			dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-			aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-			qui ratione voluptatem sequi nesciunt.
+
+			<p>Welkom bij de contact trace applicatie van Scouting Lommel!</p>
 
 			<C:choose>
 				<C:when test="${personLogIn ne null}">
+					<p>Welcome, ${personLogIn.firstName}</p>
 					<form method="POST" action="/Controller?action=LogOut">
 						<p><input type="submit" id="logOut" value="Log out"></p>
 					</form>
 				</C:when>
 				<C:otherwise>
-					<p>Welcome, ${personLogIn.firstName}</p>
 					<form method="POST" action="/Controller?action=LogIn">
 						<p><label for="userid">User id</label>
 							<input type="text" id="userid" name="userid" required>

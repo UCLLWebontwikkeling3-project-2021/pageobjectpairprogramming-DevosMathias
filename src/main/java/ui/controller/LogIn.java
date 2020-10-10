@@ -13,13 +13,22 @@ public class LogIn extends RequestHandler {
         String userid = request.getParameter("userid").toLowerCase();
         String password = request.getParameter("password");
 
-        Person person = service.get(userid); //nog try catch doen???
+        try {
+            Person person = service.get(userid); //nog try catch doen???
+            if (person.isCorrectPassword(password)) {
+                request.getSession().setAttribute("personLogIn", person);
+            }
+        } catch (Exception e) {
+            request.setAttribute("error", "No valid userid/password");
+        }
+        return "index.jsp";
 
-        if (person != null && person.isCorrectPassword(password)) {
+
+        /*if (person != null && person.isCorrectPassword(password)) {
             request.getSession().setAttribute("personLogIn", person);
         } else {
             request.setAttribute("error", "No valid userid/password");
         }
-        return "index.jsp";
+        return "index.jsp";*/
     }
 }

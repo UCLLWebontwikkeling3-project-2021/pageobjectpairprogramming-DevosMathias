@@ -57,6 +57,7 @@ h1 {
 	height: 112px;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-color: #ffffcc;
 	position: relative;
 }
 
@@ -64,7 +65,7 @@ h1 span {
 	position: absolute;
 	right: 30px;
 	bottom: 30px;
-	color: #800080;
+	color: #cc5500;
 }
 
 th,td {

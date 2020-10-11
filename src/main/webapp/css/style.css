@@ -38,7 +38,7 @@ nav ul li {
 }
 
 nav ul li a{
-	color: #303d11;
+	color: #000;
 	text-decoration: none;
 	display: block;
 }
@@ -122,11 +122,11 @@ div#container {
 
 nav ul li {
 	display: block;
-	border-bottom: 1px solid #303d11;
+	border-bottom: 1px solid #000;
 }
 
 nav ul li:first-child {
-	border-top: 1px solid #303d11;
+	border-top: 1px solid #000;
 }
 
 label,input,textarea {
@@ -179,6 +179,7 @@ td {
 	}
 	footer {
 	text-align: right;
+	color: #000;
 	}
 	    .alert-danger {
         width: 614px;

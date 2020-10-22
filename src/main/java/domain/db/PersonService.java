@@ -9,31 +9,37 @@ import java.util.Map;
 
 public class PersonService {
 	private Map<String, Person> persons = new HashMap<>();
+
+	private PersonDB db = new PersonDBSQL();
 	
 	public PersonService () {
 		Person administrator = new Person("admin", "admin@ucll.be", "t", "Ad", "Ministrator");
-		add(administrator);
+		//add(administrator);
 	}
 	
 	public Person get(String personId){
 		if(personId == null){
 			throw new DbException("No id given");
 		}
-		return persons.get(personId);
+		return db.get(personId);
+		//return persons.get(personId);
 	}
 	
 	public List<Person> getAll(){
-		return new ArrayList<Person>(persons.values());	
+		/*return new ArrayList<Person>(persons.values());*/
+		//System.out.println("test8881");
+		return db.getAll();
 	}
 
 	public void add(Person person){
-		if(person == null){
+		/*if(person == null){
 			throw new DbException("No person given");
 		}
 		if (persons.containsKey(person.getUserid())) {
 			throw new DbException("User already exists");
 		}
-		persons.put(person.getUserid(), person);
+		persons.put(person.getUserid(), person);*/
+		db.add(person);
 	}
 	
 	public void update(Person person){
@@ -55,5 +61,9 @@ public class PersonService {
 
 	public int getNumberOfPersons() {
 		return persons.size();
+	}
+
+	public void changeMail(String userid, String newMail) {
+		db.changeMail(userid, newMail);
 	}
 }

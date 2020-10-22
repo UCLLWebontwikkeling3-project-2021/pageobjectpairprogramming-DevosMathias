@@ -12,3 +12,4 @@
 log/
 target/
 
+/src/main/java/util/Secret.java

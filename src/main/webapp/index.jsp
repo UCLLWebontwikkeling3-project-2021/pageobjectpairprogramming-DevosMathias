@@ -42,7 +42,7 @@
 					</form>
 				</C:when>
 				<C:otherwise>
-					<form method="POST" action="/Controller?action=LogIn">
+					<form method="POST" action="/Controller?action=LogIn" novalidate="novalidate">
 						<p><label for="userid">User id</label>
 							<input type="text" id="userid" name="userid" required>
 						</p>

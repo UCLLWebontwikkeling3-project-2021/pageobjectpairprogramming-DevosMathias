@@ -10,7 +10,8 @@ public class ChangeMail extends RequestHandler {
         String newMail = request.getParameter("newMail");
         String error;
         try {
-            this.service.get(userid).setEmail(newMail);
+            System.out.println("test5554");
+            this.service.changeMail(userid, newMail);
             return "index.jsp";
         } catch (Exception e) {
             error = e.getMessage();

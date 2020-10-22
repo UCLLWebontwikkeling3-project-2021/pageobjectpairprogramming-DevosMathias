@@ -55,7 +55,8 @@ public class SignUp extends RequestHandler {
     private void setPassword(HttpServletRequest request, Person person, ArrayList<String> errors) {
         try {
             String password = request.getParameter("password");
-            person.setPassword(password);
+            //password zal hier gehashed worden zodat het onleesbaar in de databank komt
+            person.setPasswordHashed(password);
             request.setAttribute("passwordPreviousValue", password);
         } catch (Exception e) {
             errors.add(e.getMessage());

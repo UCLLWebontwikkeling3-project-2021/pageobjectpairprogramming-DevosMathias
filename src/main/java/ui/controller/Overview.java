@@ -12,6 +12,7 @@ public class Overview extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         List<Person> persons = service.getAll();
+        //System.out.println("test88881");
         request.setAttribute("persons", persons);
         return "personoverview.jsp";
     }

@@ -15,7 +15,7 @@ public class LogIn extends RequestHandler {
 
         try {
             Person person = service.get(userid); //nog try catch doen???
-            if (person.isCorrectPassword(password)) {
+            if (person != null && person.isCorrectPassword(password)) {
                 request.getSession().setAttribute("personLogIn", person);
             }
         } catch (Exception e) {

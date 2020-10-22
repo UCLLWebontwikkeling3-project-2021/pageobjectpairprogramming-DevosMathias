@@ -1,5 +1,11 @@
 package domain.model;
 
+import domain.db.DbException;
+
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,22 +59,65 @@ public class Person {
 		return email;
 	}
 	
-	private String getPassword() {
+	public String getPassword() {
 		return password;
+	}
+
+	private static String hashPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		//create MessageDigest
+		MessageDigest crypt = MessageDigest.getInstance("SHA-512");
+		//reset
+		crypt.reset();
+		//update
+		byte[] passwordBytes = password.getBytes("UTF-8");
+		crypt.update(passwordBytes);
+		//digest
+		byte[] digest = crypt.digest();
+		//convert to String
+		BigInteger digestAsBigInteger = new BigInteger(1, digest);
+		//return hashed password
+		return digestAsBigInteger.toString(16);
+
 	}
 	
 	public boolean isCorrectPassword(String password) {
 		if(password.isEmpty()){
 			throw new IllegalArgumentException("No password given");
 		}
-		return getPassword().equals(password);
+		String hashedPassword = "";
+		try {
+			hashedPassword = hashPassword(password);
+			System.out.println(getPassword());
+			System.out.println(hashedPassword);
+		} catch (Exception e) {
+			System.out.println("False password");
+		}
+		return getPassword().equals(hashedPassword);
 	}
 
 	public void setPassword(String password) {
 		if(password.isEmpty()){
 			throw new IllegalArgumentException("No password given");
 		}
+
 		this.password = password;
+	}
+
+	public void setPasswordHashed(String password) {
+		if(password.isEmpty()){
+			throw new IllegalArgumentException("No password given");
+		}
+
+		String hashedPassword = "";
+
+		try {
+			hashedPassword = hashPassword(password);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		this.password = hashedPassword;
+
 	}
 
 	public String getFirstName() {

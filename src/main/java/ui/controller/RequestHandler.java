@@ -1,21 +1,21 @@
 package ui.controller;
 
-import domain.db.PersonService;
+import domain.model.ContactTracingService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public abstract class RequestHandler {
 
-    protected PersonService service;
+    protected ContactTracingService service;
 
     public abstract String handleRequest(HttpServletRequest request, HttpServletResponse response);
 
-    public void setModel(PersonService service) {
+    public void setModel(ContactTracingService service) {
         this.service = service;
     }
 
-    public PersonService getService() {
+    public ContactTracingService getService() {
         return service;
     }
 }

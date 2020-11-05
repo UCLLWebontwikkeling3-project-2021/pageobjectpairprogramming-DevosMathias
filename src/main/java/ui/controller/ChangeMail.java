@@ -11,7 +11,7 @@ public class ChangeMail extends RequestHandler {
         String error;
         try {
             System.out.println("test5554");
-            this.service.changeMail(userid, newMail);
+            this.service.changeMailPerson(userid, newMail);
             return "index.jsp";
         } catch (Exception e) {
             error = e.getMessage();

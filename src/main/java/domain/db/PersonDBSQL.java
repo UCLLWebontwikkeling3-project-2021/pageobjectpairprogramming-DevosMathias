@@ -25,6 +25,9 @@ public class PersonDBSQL implements PersonDB {
         if (person == null) {
             throw new DbException("Nothing to add.");
         }
+        if (personExists(person)) {
+            throw new DbException("User already exists");
+        }
         String sql = String.format("INSERT INTO %s.person (userid, email, password, fname, lname) VALUES (?, ?, ?, ?, ?)", this.schema);
 
         try {
@@ -36,9 +39,18 @@ public class PersonDBSQL implements PersonDB {
             statementSQL.setString(5, person.getLastName());
             statementSQL.execute();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new DbException();
+            throw new DbException(e);
         }
+    }
+
+    private boolean personExists(Person person) {
+        List<Person> persons = getAll();
+        for (Person p : persons) {
+            if (p.getUserid().equals(person.getUserid())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -65,7 +77,9 @@ public class PersonDBSQL implements PersonDB {
     }
 
     public Person get(String id) {
-        System.out.println(id);
+        if (id == null) {
+            throw new DbException("No id given");
+        }
         Person person = null;
         String sql = String.format("SELECT * FROM %s.person WHERE userid = ?", this.schema);
         try {
@@ -84,8 +98,7 @@ public class PersonDBSQL implements PersonDB {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new DbException();
+            throw new DbException(e);
         }
         return person;
     }
@@ -100,8 +113,7 @@ public class PersonDBSQL implements PersonDB {
             statementSQL.execute();
 
         } catch (SQLException e) {
-            throw new DbException();
+            throw new DbException(e);
         }
-
     }
 }

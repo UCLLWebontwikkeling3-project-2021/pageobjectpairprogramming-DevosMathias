@@ -1,6 +1,6 @@
 package ui.controller;
 
-import domain.db.PersonService;
+import domain.model.ContactTracingService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/Controller")
 public class controller extends HttpServlet {
-    private PersonService service = new PersonService();
+    private ContactTracingService service = new ContactTracingService();
     private HandlerFactory handlerFactory = new HandlerFactory();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

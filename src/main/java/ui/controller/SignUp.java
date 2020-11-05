@@ -22,7 +22,7 @@ public class SignUp extends RequestHandler {
 
         if (errors.size() == 0) {
             try {
-                service.add(person);
+                service.addPerson(person);
                 return "index.jsp";
             } catch (Exception e) {
                 errors.add(e.getMessage());

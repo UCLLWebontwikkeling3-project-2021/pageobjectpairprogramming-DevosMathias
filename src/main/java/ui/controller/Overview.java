@@ -1,6 +1,5 @@
 package ui.controller;
 
-import domain.db.PersonService;
 import domain.model.Person;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +10,7 @@ public class Overview extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        List<Person> persons = service.getAll();
-        //System.out.println("test88881");
+        List<Person> persons = service.getAllPersons();
         request.setAttribute("persons", persons);
         return "personoverview.jsp";
     }

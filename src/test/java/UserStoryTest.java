@@ -59,7 +59,7 @@ public class UserStoryTest {
     }
 
     @Test
-    public void Test_contacts_added_with_same_information_but_different_date_or_time_displays_twice() {
+    public void Test_contacts_added_with_same_information_but_different_date_displays_twice() {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -85,7 +85,7 @@ public class UserStoryTest {
     }
 
     @Test
-    public void Test_contacts_added_with_same_information_but_different_date_or_time_displays_once_in_unique_table() {
+    public void Test_contacts_added_with_same_information_but_different_date_displays_once_in_unique_table() {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -94,8 +94,8 @@ public class UserStoryTest {
 
         LocalTime time = LocalTime.now();
 
-        submitForm("Jos", "Swinnen", date1.format(formatter1), time.format(formatter2), "+320470864217", "josswinnen@hotmail.com");
-        submitForm("Jos", "Swinnen", date2.format(formatter1), time.format(formatter2), "+320470864217", "josswinnen@hotmail.com");
+        submitForm("Maria", "Cochet", date1.format(formatter1), time.format(formatter2), "+320470354627", "mariacochet@hotmail.com");
+        submitForm("Maria", "Cochet", date2.format(formatter1), time.format(formatter2), "+320470354627", "mariacochet@hotmail.com");
 
         WebElement link = driver.findElement(By.id("link"));
         link.click();
@@ -103,9 +103,65 @@ public class UserStoryTest {
         ArrayList<WebElement> lis = (ArrayList<WebElement>) driver.findElements(By.tagName("td"));
         assertTrue(containsWebElement(lis, date2.format(formatter1)));
         assertTrue(containsWebElement(lis, time.format(formatter2)));
-        assertTrue(containsWebElement(lis, "Jos Swinnen"));
+        assertTrue(containsWebElement(lis, "Maria Cochet"));
+    }
+
+    @Test
+    public void Test_contact_added_with_same_information_but_different_hour_displays_twice() {
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+
+        LocalDate date = LocalDate.now();
+
+        LocalTime time1 = LocalTime.now();
+        LocalTime time2 = LocalTime.now().minusHours(1);
+
+        submitForm("Sarah", "Devos", date.format(formatter1), time1.format(formatter2), "+310487521349", "sarahdevos@hotmail.com");
+        submitForm("Sarah", "Devos", date.format(formatter1), time2.format(formatter2), "+310487521349", "sarahdevos@hotmail.com");
+
+        ArrayList<WebElement> lis = (ArrayList<WebElement>) driver.findElements(By.tagName("td"));
+
+        //first submit
+        assertTrue(containsWebElement(lis, date.format(formatter1)));
+        assertTrue(containsWebElement(lis, time1.format(formatter2)));
+        assertTrue(containsWebElement(lis, "Sarah Devos"));
+
+        //second submit
+        assertTrue(containsWebElement(lis, date.format(formatter1)));
+        assertTrue(containsWebElement(lis, time2.format(formatter2)));
+        assertTrue(containsWebElement(lis, "Sarah Devos"));
+    }
+
+    @Test
+    public void Test_contact_added_with_same_information_but_different_hour_displays_once_in_unque_table() {
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+
+        LocalDate date = LocalDate.now();
+
+        LocalTime time1 = LocalTime.now();
+        LocalTime time2 = LocalTime.now().minusHours(1);
+
+        submitForm("Maarten", "Devos", date.format(formatter1), time1.format(formatter2), "+315489755544", "maartendevos@hotmail.com");
+        submitForm("Maarten", "Devos", date.format(formatter1), time2.format(formatter2), "+315489755544", "maartendevos@hotmail.com");
+
+        WebElement link = driver.findElement(By.id("link"));
+        link.click();
+
+        ArrayList<WebElement> lis = (ArrayList<WebElement>) driver.findElements(By.tagName("td"));
+
+        //first submit
+        assertTrue(containsWebElement(lis, date.format(formatter1)));
+        if (time2.isBefore(time1)) {
+            assertTrue(containsWebElement(lis, time1.format(formatter2)));
+        } else {
+            assertTrue(containsWebElement(lis, time2.format(formatter2)));
+        }
+        assertTrue(containsWebElement(lis, "Maarten Devos"));
 
     }
+
+
 
     /*@Test
     public void Test_link_pressed_twice_shows_same_page_with_original_link() {

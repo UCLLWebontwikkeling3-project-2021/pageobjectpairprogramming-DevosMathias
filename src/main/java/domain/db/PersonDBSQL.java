@@ -56,7 +56,7 @@ public class PersonDBSQL implements PersonDB {
     @Override
     public List<Person> getAll() {
         List<Person> persons = new ArrayList<>();
-        String sql = String.format("SELECT * FROM %s.person", this.schema);
+        String sql = String.format("SELECT * FROM %s.person ORDER BY fname, lname", this.schema);
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
             ResultSet result = statementSql.executeQuery();
@@ -99,6 +99,10 @@ public class PersonDBSQL implements PersonDB {
 
         } catch (SQLException e) {
             throw new DbException(e);
+        }
+
+        if (person == null) {
+            throw new DbException("User with id: " + id + " does not exist");
         }
         return person;
     }

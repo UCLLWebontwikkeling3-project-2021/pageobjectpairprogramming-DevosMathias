@@ -49,10 +49,10 @@
                 <th>Name</th>
                 <C:choose>
                     <C:when test="${showUniqueContacts eq 'no'}">
-                        <th id="link"><a href="/Controller?action=ContactOverview&value=yes">Toon alle unieke contacten</a></th>
+                        <th id="link"><a href="/Controller?action=ContactOverview&value=yes">Show all unique contacts</a></th>
                     </C:when>
                     <C:otherwise>
-                        <th id="link"><a href="/Controller?action=ContactOverview&value=no">Toon alle contacten</a></th>
+                        <th id="link"><a href="/Controller?action=ContactOverview&value=no">Show all contacts</a></th>
                     </C:otherwise>
                 </C:choose>
             </tr>
@@ -60,7 +60,7 @@
             <C:forEach var="contact" items="${contacts}">
                 <fmt:parseDate value="${contact.date}" type="date" pattern="yyyy-MM-dd" var="parsedDate"/>
                 <tr>
-                    <td id="dateTime"><fmt:formatDate pattern="dd/MM/yyyy" value='${parsedDate}'/></td>
+                    <td><fmt:formatDate pattern="dd/MM/yyyy" value='${parsedDate}'/></td>
                     <td>${contact.hour}</td>
                     <td>${contact.firstName} ${contact.lastName}</td>
                 </tr>

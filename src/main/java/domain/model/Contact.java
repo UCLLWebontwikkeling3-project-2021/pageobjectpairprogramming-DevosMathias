@@ -34,7 +34,7 @@ public class Contact {
 
     public void setFirstname(String firstName) {
         if (firstName.isEmpty()) {
-            throw new IllegalArgumentException("No first name given");
+            throw new DomainException("No first name given");
         }
         this.firstName = firstName;
     }
@@ -45,7 +45,7 @@ public class Contact {
 
     public void setLastname(String lastName) {
         if (lastName.isEmpty()) {
-            throw new IllegalArgumentException("No last name given");
+            throw new DomainException("No last name given");
         }
         this.lastName = lastName;
     }
@@ -56,7 +56,7 @@ public class Contact {
 
     public void setDate(LocalDate date) {
         if (date.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("Date cannot be in the future");
+            throw new DomainException("Date cannot be in the future");
         }
         this.date = date;
     }
@@ -66,8 +66,10 @@ public class Contact {
     }
 
     public void setHour(LocalTime hour) {
-        if (this.date.equals(LocalDate.now() )&& hour.isAfter(LocalTime.now())) {
-            throw new IllegalArgumentException("Time cannot be in the future");
+        if (this.date != null) {
+            if (this.date.equals(LocalDate.now() )&& hour.isAfter(LocalTime.now())) {
+                throw new DomainException("Time cannot be in the future");
+            }
         }
         this.hour = hour;
     }
@@ -84,10 +86,8 @@ public class Contact {
         Pattern p = Pattern.compile(USERID_PATTERN);
         Matcher m = p.matcher(gsm);
         if (!m.matches()) {
-            throw new IllegalArgumentException("Gsm not valid");
+            throw new DomainException("Gsm not valid, must be of pattern +xxxxxxxxxx");
         }
-
-        System.out.println("test");
         this.gsm = gsm;
     }
 
@@ -97,7 +97,7 @@ public class Contact {
 
     public void setEmail(String email) {
         if(email.isEmpty()){
-            throw new IllegalArgumentException("No email given");
+            throw new DomainException("No email given");
         }
         String USERID_PATTERN =
                 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -105,7 +105,7 @@ public class Contact {
         Pattern p = Pattern.compile(USERID_PATTERN);
         Matcher m = p.matcher(email);
         if (!m.matches()) {
-            throw new IllegalArgumentException("Email not valid");
+            throw new DomainException("Email not valid");
         }
         this.email = email;
     }

@@ -1,6 +1,7 @@
 package ui.controller;
 
 import domain.model.ContactTracingService;
+import domain.model.DomainException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,8 +33,9 @@ public class controller extends HttpServlet {
                 RequestHandler handler = handlerFactory.getHandler(command, service);
                 destination = handler.handleRequest(request, response);
             } catch (Exception e) {
-                request.setAttribute("error", e.getMessage());
-                destination = "error.jsp";
+                throw new DomainException(e);
+                /*request.setAttribute("error", e.getMessage());
+                destination = "error.jsp";*/
             }
         }
 

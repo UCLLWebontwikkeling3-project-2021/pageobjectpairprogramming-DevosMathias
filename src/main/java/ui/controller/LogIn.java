@@ -19,6 +19,7 @@ public class LogIn extends RequestHandler {
                 request.getSession().setAttribute("personLogIn", person);
             }
         } catch (Exception e) {
+            System.out.println("test");
             request.setAttribute("error", "No valid userid/password");
         }
         return "index.jsp";

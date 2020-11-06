@@ -33,14 +33,14 @@ public class Person {
 
 	public void setUserid(String userid) {
 		if(userid.isEmpty()){
-			throw new IllegalArgumentException("No userid given");
+			throw new DomainException("No userid given");
 		}
 		this.userid = userid;
 	}
 
 	public void setEmail(String email) {
 		if(email.isEmpty()){
-			throw new IllegalArgumentException("No email given");
+			throw new DomainException("No email given");
 		}
 		String USERID_PATTERN = 
 				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -48,7 +48,7 @@ public class Person {
 		Pattern p = Pattern.compile(USERID_PATTERN);
 		Matcher m = p.matcher(email);
 		if (!m.matches()) {
-			throw new IllegalArgumentException("Email not valid");
+			throw new DomainException("Email not valid");
 		}
 		this.email = email;
 	}
@@ -82,22 +82,25 @@ public class Person {
 	
 	public boolean isCorrectPassword(String password) {
 		if(password.isEmpty()){
-			throw new IllegalArgumentException("No password given");
+			throw new DomainException("No password given");
 		}
 		String hashedPassword = "";
 		try {
 			hashedPassword = hashPassword(password);
-			System.out.println(getPassword());
-			System.out.println(hashedPassword);
+
+			if (!getPassword().equals(hashedPassword)) {
+				throw new DomainException("Password is not correct");
+			}
+
+			return true;
 		} catch (Exception e) {
-			System.out.println("False password");
+			throw new DomainException(e.getMessage());
 		}
-		return getPassword().equals(hashedPassword);
 	}
 
 	public void setPassword(String password) {
 		if(password.isEmpty()){
-			throw new IllegalArgumentException("No password given");
+			throw new DomainException("No password given");
 		}
 
 		this.password = password;
@@ -105,7 +108,7 @@ public class Person {
 
 	public void setPasswordHashed(String password) {
 		if(password.isEmpty()){
-			throw new IllegalArgumentException("No password given");
+			throw new DomainException("No password given");
 		}
 
 		String hashedPassword = "";
@@ -113,11 +116,9 @@ public class Person {
 		try {
 			hashedPassword = hashPassword(password);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			throw new DomainException(e);
 		}
-
 		this.password = hashedPassword;
-
 	}
 
 	public String getFirstName() {
@@ -126,7 +127,7 @@ public class Person {
 
 	public void setFirstName(String firstName) {
 		if(firstName.isEmpty()){
-			throw new IllegalArgumentException("No firstname given");
+			throw new DomainException("No firstname given");
 		}
 		this.firstName = firstName;
 	}
@@ -137,7 +138,7 @@ public class Person {
 
 	public void setLastName(String lastName) {
 		if(lastName.isEmpty()){
-			throw new IllegalArgumentException("No last name given");
+			throw new DomainException("No last name given");
 		}
 		this.lastName = lastName;
 	}

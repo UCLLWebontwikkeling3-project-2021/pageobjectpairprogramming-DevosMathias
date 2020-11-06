@@ -33,7 +33,7 @@ public class controller extends HttpServlet {
                 RequestHandler handler = handlerFactory.getHandler(command, service);
                 destination = handler.handleRequest(request, response);
             } catch (Exception e) {
-                throw new DomainException(e);
+                throw new IllegalArgumentException(e);
                 /*request.setAttribute("error", e.getMessage());
                 destination = "error.jsp";*/
             }

@@ -17,7 +17,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class UserStoryTest {
+public class ShowUniqueContactsLinkTest {
     private WebDriver driver;
     private String path = "http://localhost:8080/Controller";
 

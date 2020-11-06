@@ -27,7 +27,7 @@ public class RegisterTest {
 	
 	@After
 	public void clean() {
-	    driver.quit();
+	    //driver.quit();
 	}
 
 	@Test
